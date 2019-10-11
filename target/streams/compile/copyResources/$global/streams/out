@@ -1,4 +1,0 @@
-[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/home/luffy/IdeaProjects/wikipedia/src/main/resources/wikipedia,/home/luffy/IdeaProjects/wikipedia/target/scala-2.11/classes/wikipedia)[0m
-[0m[[0mdebug[0m] [0m	(/home/luffy/IdeaProjects/wikipedia/src/main/resources/wikipedia/shakespeare.txt,/home/luffy/IdeaProjects/wikipedia/target/scala-2.11/classes/wikipedia/shakespeare.txt)[0m
-[0m[[0mdebug[0m] [0m	(/home/luffy/IdeaProjects/wikipedia/src/main/resources/wikipedia/wikipedia.dat,/home/luffy/IdeaProjects/wikipedia/target/scala-2.11/classes/wikipedia/wikipedia.dat)[0m
