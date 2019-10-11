@@ -1,0 +1,4 @@
+
+object SCObject extends App {
+
+}
