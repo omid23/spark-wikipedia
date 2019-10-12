@@ -30,8 +30,17 @@ object WikipediaRanking {
     *  Hint1: consider using method `aggregate` on RDD[T].
     *  Hint2: consider using method `mentionsLanguage` on `WikipediaArticle`
     */
-  def occurrencesOfLang(lang: String, rdd: RDD[WikipediaArticle]): Int = rdd.aggregate(0)((count, article) => article.mentionsLanguage(lang) match { case true => count + 1 case _ => count + 0 }, (a, b) => a + b)
 
+  // TODO aggregate difficult !? https://stackoverflow.com/questions/28240706/explain-the-aggregate-functionality-in-spark/38949457
+
+  def occurrencesOfLang(lang: String, rdd: RDD[WikipediaArticle]): Int = {
+    val seqOp: (Int, WikipediaArticle) => Int = (count, article) => article.mentionsLanguage(lang) match {
+      case true => count + 1
+      case _ => count + 0
+    }
+    val CombOp: (Int, Int) => Int = (a, b) => a + b
+    rdd.aggregate(0)(seqOp, CombOp)
+  }
   /* (1) Use `occurrencesOfLang` to compute the ranking of the languages
    *     (`val langs`) by determining the number of Wikipedia articles that
    *     mention each language at least once. Don't forget to sort the
@@ -46,6 +55,7 @@ object WikipediaRanking {
    * to the Wikipedia pages in which it occurs.
    */
   def makeIndex(langs: List[String], rdd: RDD[WikipediaArticle]): RDD[(String, Iterable[WikipediaArticle])] = rdd.flatMap(a => langs.map(l => a.mentionsLanguage(l) match { case true => (l, a) case false => null })).filter(_ != null).groupByKey()
+
 
   /* (2) Compute the language ranking again, but now using the inverted index. Can you notice
    *     a performance improvement?
